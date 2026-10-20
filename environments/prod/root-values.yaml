@@ -1,0 +1,17 @@
+environment:
+  name: prod
+
+repositories:
+  releaseRepo: git@github.com:thake/argocd-playground-release.git
+  environmentRepo: git@github.com:thake/argocd-playground-environment.git
+
+apps:
+  auth-service:
+    enabled: true
+    version: v1.0.1       # Production runs verified patch v1.0.1
+    namespace: prod
+
+  order-service:
+    enabled: true
+    version: v1.0.0       # Production runs stable v1.0.0
+    namespace: prod

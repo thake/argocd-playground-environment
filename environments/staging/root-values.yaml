@@ -1,0 +1,17 @@
+environment:
+  name: staging
+
+repositories:
+  releaseRepo: git@github.com:thake/argocd-playground-release.git
+  environmentRepo: git@github.com:thake/argocd-playground-environment.git
+
+apps:
+  auth-service:
+    enabled: true
+    version: v2.0.0       # Testing bleeding edge v2.0.0 in staging
+    namespace: staging
+
+  order-service:
+    enabled: true
+    version: v1.1.0       # Testing feature release v1.1.0
+    namespace: staging

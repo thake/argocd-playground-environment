@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app-prod
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: git@github.com:thake/argocd-playground-environment.git
+      targetRevision: main
+      ref: values-repo
+    - repoURL: git@github.com:thake/argocd-playground-release.git
+      targetRevision: main
+      path: charts/root-app
+      helm:
+        valueFiles:
+          - $values-repo/environments/prod/root-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
